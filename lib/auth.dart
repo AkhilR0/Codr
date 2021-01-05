@@ -5,4 +5,5 @@ import 'dart:async';
 
 class AuthService {
   String name;
+  String last;
 }
