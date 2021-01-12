@@ -185,7 +185,7 @@ class SignIn extends StatelessWidget {
 class SignInOption extends StatelessWidget {
   final Color signColor;
   final IconData signIcon;
-  int platformMethod;
+  final int platformMethod;
   SignInOption(this.signIcon, this.signColor, this.platformMethod);
   @override
   Widget build(BuildContext context) {
@@ -240,10 +240,10 @@ class SignInOption extends StatelessWidget {
 }
 
 class GrayTextField extends StatelessWidget {
-  String theText;
-  bool obs;
-  Color txtColor;
-  double heig;
+  final String theText;
+  final bool obs;
+  final Color txtColor;
+  final double heig;
   String input;
   GrayTextField(this.theText, this.txtColor, this.obs, this.heig, this.input);
   @override

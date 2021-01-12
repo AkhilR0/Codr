@@ -65,9 +65,9 @@ class Settings extends StatelessWidget {
 }
 
 class Block extends StatelessWidget {
-  Icon icon;
-  Text text;
-  Text desc;
+  final Icon icon;
+  final Text text;
+  final Text desc;
   Block(this.icon, this.text, this.desc);
   @override
   Widget build(BuildContext context) {

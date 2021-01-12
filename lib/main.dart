@@ -4,12 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Screens
-import 'generalAppBar.dart';
-import 'settings.dart';
-import 'newPost.dart';
-import 'notifications.dart';
-import 'profile.dart';
-import 'grid.dart';
 import 'signIn.dart';
 
 // Firebase
@@ -125,113 +119,7 @@ class MyApp extends StatelessWidget {
         buttonColor: Color(0xff5A43BC),
         fontFamily: 'Muli',
       ),
-      home: userState(),
+      home: UserState(),
     );
-  }
-}
-
-class MainScreen extends StatefulWidget {
-  @override
-  _MainScreenState createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
-      appBar: GAppBar(),
-      body: ChangingBody(),
-      bottomNavigationBar: Theme(
-        data: Theme.of(context).copyWith(
-          canvasColor: Theme.of(context).primaryColorLight,
-        ),
-        child: BottomNavigationBar(
-          key: bottomKey,
-          iconSize: 30,
-          type: BottomNavigationBarType.fixed,
-          unselectedItemColor: Color(0x6634ffc8),
-          unselectedFontSize: 0,
-          selectedFontSize: 0,
-          backgroundColor: Theme.of(context).primaryColorLight,
-          onTap: (int i) {
-            setState(() {
-              bodyIndex = i;
-            });
-          },
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.grid_view),
-              label: 'Feed',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.notifications),
-              label: 'Notifications',
-            ),
-            BottomNavigationBarItem(
-              icon: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(100)),
-                    color: Theme.of(context).buttonColor,
-                  ),
-                  child: NewPost(),
-                ),
-              ),
-              label: 'New Post',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Profile',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'Settings',
-            ),
-          ],
-          currentIndex: bodyIndex,
-          selectedItemColor: Theme.of(context).accentColor,
-        ),
-      ),
-    );
-  }
-}
-
-class ChangingBody extends StatefulWidget {
-  @override
-  _ChangingBodyState createState() => _ChangingBodyState();
-}
-
-class _ChangingBodyState extends State<ChangingBody> {
-  @override
-  Widget build(BuildContext context) {
-    switch (bodyIndex) {
-      case 0:
-        {
-          return Grid();
-        }
-        break;
-      case 1:
-        {
-          return Notifications();
-        }
-        break;
-      case 2:
-        {
-          return Container();
-        }
-        break;
-      case 3:
-        {
-          return Profile();
-        }
-        break;
-      case 4:
-        {
-          return Settings();
-        }
-        break;
-    }
   }
 }

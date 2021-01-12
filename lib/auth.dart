@@ -1,9 +1,9 @@
+import 'package:codr/pageAnimation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:github_sign_in/github_sign_in.dart';
 import 'package:flutter/material.dart';
-import 'main.dart';
 import 'signIn.dart';
 
 Future<User> signInWithGoogle(BuildContext context) async {
@@ -115,12 +115,12 @@ Future<User> signInWithGitHub(BuildContext context) async {
   return null;
 }
 
-class userState extends StatefulWidget {
+class UserState extends StatefulWidget {
   @override
-  _userStateState createState() => _userStateState();
+  _UserStateState createState() => _UserStateState();
 }
 
-class _userStateState extends State<userState> {
+class _UserStateState extends State<UserState> {
   @override
   Widget build(BuildContext context) {
     if (FirebaseAuth.instance.currentUser != null) {
