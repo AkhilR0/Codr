@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CommonContainer extends StatelessWidget {
-  Widget containerChild;
-  Color containerColor;
+  final Widget containerChild;
+  final Color containerColor;
   CommonContainer(this.containerColor, this.containerChild);
   @override
   Widget build(BuildContext context) {

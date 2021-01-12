@@ -226,11 +226,11 @@ class _NewPostState extends State<NewPost> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         SignInOption(
-                            Icons.ac_unit, Theme.of(context).primaryColorLight),
+                            Icons.ac_unit, Theme.of(context).primaryColorLight,1),
                         SignInOption(Icons.format_align_justify_outlined,
-                            Theme.of(context).primaryColorLight),
+                            Theme.of(context).primaryColorLight,2),
                         SignInOption(Icons.mark_chat_read,
-                            Theme.of(context).primaryColorLight),
+                            Theme.of(context).primaryColorLight,3),
                       ],
                     ),
                   ],

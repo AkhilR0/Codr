@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'newPost.dart';
 import 'commonContainer.dart';
+import 'signIn.dart';
 
 class Profile extends StatelessWidget {
   @override
@@ -36,7 +37,7 @@ class Profile extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "Akhil Ramidi",
+                          userID.displayName,
                           style: TextStyle(
                               color: Theme.of(context).accentColor,
                               fontSize: 30),

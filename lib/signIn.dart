@@ -1,5 +1,11 @@
-import 'package:codr/commonContainer.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'auth.dart';
+import 'signUp.dart';
+
+String username;
+String password;
+User userID;
 
 class SignIn extends StatelessWidget {
   @override
@@ -17,12 +23,20 @@ class SignIn extends StatelessWidget {
           children: [
             Text("Codr",
                 style: TextStyle(
-                    color: Theme.of(context).accentColor, fontSize: 70, fontFamily: 'AdobeClean')),
+                    color: Theme.of(context).accentColor,
+                    fontSize: 70,
+                    fontFamily: 'AdobeClean')),
             Padding(
               padding: const EdgeInsets.only(top: 20.0),
-              child: Text("Sign In",
-                  style: TextStyle(color: Colors.white, fontSize: 25, fontFamily: 'NotoSans',fontWeight: FontWeight.w700),
-            ),),
+              child: Text(
+                "Sign In",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 25,
+                    fontFamily: 'NotoSans',
+                    fontWeight: FontWeight.w700),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 13.0),
               child: Column(
@@ -34,11 +48,11 @@ class SignIn extends StatelessWidget {
                     ),
                     height: 55,
                     child: Center(
-                        child: GrayTextField(
-                            "Username or Email", Colors.white, false, 55)),
+                        child: GrayTextField("Username or Email", Colors.white,
+                            false, 55, username)),
                   ),
                   SizedBox(height: 15),
-                  GrayTextField("Password", Colors.white, true, 55)
+                  GrayTextField("Password", Colors.white, true, 55, password)
                 ],
               ),
             ),
@@ -50,12 +64,28 @@ class SignIn extends StatelessWidget {
                   onPressed: () {},
                 ),
                 Text("Keep me signed in",
-                    style: TextStyle(color: Colors.white, fontSize: 17,fontFamily: 'NotoSans')),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
+                        fontFamily: 'NotoSans')),
               ],
             ),
             Container(
               child: RawMaterialButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    try {
+                      UserCredential userCredential = await FirebaseAuth
+                          .instance
+                          .signInWithEmailAndPassword(
+                              email: username, password: password);
+                    } on FirebaseAuthException catch (e) {
+                      if (e.code == 'user-not-found') {
+                        print('No user found for that email.');
+                      } else if (e.code == 'wrong-password') {
+                        print('Wrong password provided for that user.');
+                      }
+                    }
+                  },
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -69,7 +99,9 @@ class SignIn extends StatelessWidget {
                         ]),
                     height: 48,
                     child: Center(
-                      child: Text("Sign In", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      child: Text("Sign In",
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold)),
                     ),
                   )),
             ),
@@ -87,7 +119,10 @@ class SignIn extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 3.0),
                   child: Text(
                     "Or Sign In With",
-                    style: TextStyle(color: Colors.white, fontSize: 17,fontFamily: 'NotoSans'),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
+                        fontFamily: 'NotoSans'),
                   ),
                 ),
                 Container(
@@ -102,10 +137,13 @@ class SignIn extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                SignInOption(Icons.ac_unit,Theme.of(context).primaryColor,),
-                SignInOption(Icons.format_align_justify_outlined,Theme.of(context).primaryColor,),
-                SignInOption(Icons.mark_chat_read,Theme.of(context).primaryColor,),
-                SignInOption(Icons.access_alarms,Theme.of(context).primaryColor,),
+                SignInOption(Icons.ac_unit, Theme.of(context).primaryColor, 1),
+                SignInOption(Icons.format_align_justify_outlined,
+                    Theme.of(context).primaryColor, 2),
+                SignInOption(
+                    Icons.mark_chat_read, Theme.of(context).primaryColor, 3),
+                SignInOption(
+                    Icons.access_alarms, Theme.of(context).primaryColor, 4),
               ],
             ),
             Row(
@@ -113,11 +151,28 @@ class SignIn extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text("New User?",
-                    style: TextStyle(color: Colors.white, fontSize: 17, fontFamily: 'NotoSans')),
-                SizedBox(width: 15),
-                Text("Create an Account",
                     style: TextStyle(
-                        color: Theme.of(context).buttonColor, fontSize: 17, fontFamily: 'NotoSans'))
+                        color: Colors.white,
+                        fontSize: 17,
+                        fontFamily: 'NotoSans')),
+                SizedBox(width: 15),
+                RawMaterialButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return SignUp();
+                        },
+                      ),
+                    );
+                  },
+                  child: Text("Create an Account",
+                      style: TextStyle(
+                          color: Theme.of(context).buttonColor,
+                          fontSize: 17,
+                          fontFamily: 'NotoSans')),
+                )
               ],
             ),
           ],
@@ -130,7 +185,8 @@ class SignIn extends StatelessWidget {
 class SignInOption extends StatelessWidget {
   final Color signColor;
   final IconData signIcon;
-  SignInOption(this.signIcon, this.signColor);
+  int platformMethod;
+  SignInOption(this.signIcon, this.signColor, this.platformMethod);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -141,7 +197,43 @@ class SignInOption extends StatelessWidget {
       child: IconButton(
         icon: Icon(signIcon),
         color: Theme.of(context).accentColor,
-        onPressed: () {},
+        onPressed: () async {
+          switch (platformMethod) {
+            case 1:
+              {
+                userID = await signInWithGoogle(context);
+                print(userID);
+              }
+              break;
+            case 2:
+              {
+                userID = await signInWithFacebook(context);
+                print(userID);
+              }
+              break;
+            case 3:
+              {
+                userID = await signInWithGitHub(context);
+                print(userID);
+              }
+              break;
+            case 4:
+              // {
+              //   UserCredential userCredential =
+              //       await SignInWithApple().whenComplete(() {
+              //     Navigator.pop(context);
+              //     Navigator.of(context).push(
+              //       MaterialPageRoute(
+              //         builder: (context) {
+              //           return MainScreen();
+              //         },
+              //       ),
+              //     );
+              //   });
+              // }
+              break;
+          }
+        },
       ),
     );
   }
@@ -152,7 +244,8 @@ class GrayTextField extends StatelessWidget {
   bool obs;
   Color txtColor;
   double heig;
-  GrayTextField(this.theText, this.txtColor, this.obs, this.heig);
+  String input;
+  GrayTextField(this.theText, this.txtColor, this.obs, this.heig, this.input);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -165,8 +258,12 @@ class GrayTextField extends StatelessWidget {
         padding: const EdgeInsets.only(left: 16.0),
         child: Center(
           child: TextFormField(
+            onChanged: (value) {
+              input = value;
+              print(input);
+            },
             obscureText: obs,
-            style: TextStyle(color: txtColor,  fontFamily: 'NotoSans'),
+            style: TextStyle(color: txtColor, fontFamily: 'NotoSans'),
             decoration: InputDecoration(
               hintStyle: TextStyle(color: txtColor, fontFamily: 'NotoSans'),
               hintText: theText,

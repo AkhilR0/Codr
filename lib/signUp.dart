@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'signIn.dart';
 
+String firstName;
+String lastName;
+
 class SignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -18,30 +21,52 @@ class SignUp extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 20.0, bottom: 18),
               child: Text("Sign Up",
-                  style: TextStyle(color: Colors.white, fontSize: 25, fontFamily: 'NotoSans')),
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25,
+                      fontFamily: 'NotoSans')),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text("Already a user?",
-                    style: TextStyle(color: Colors.white, fontSize: 17, fontFamily: 'NotoSans')),
-                SizedBox(width: 15),
-                Text("Sign In",
                     style: TextStyle(
-                        color: Theme.of(context).buttonColor, fontSize: 17, fontFamily: 'NotoSans'))
+                        color: Colors.white,
+                        fontSize: 17,
+                        fontFamily: 'NotoSans')),
+                SizedBox(width: 15),
+                RawMaterialButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return SignIn();
+                        },
+                      ),
+                    );
+                  },
+                                  child: Text("Sign In",
+                      style: TextStyle(
+                          color: Theme.of(context).buttonColor,
+                          fontSize: 17,
+                          fontFamily: 'NotoSans')),
+                )
               ],
             ),
             Padding(
               padding: const EdgeInsets.only(top: 13.0),
               child: Column(
                 children: [
-                  GrayTextField("First Name", Colors.white, false, 55),
+                  GrayTextField(
+                      "First Name", Colors.white, false, 55, firstName),
                   SizedBox(height: 15),
-                  GrayTextField("Last Name", Colors.white, false, 55),
+                  GrayTextField("Last Name", Colors.white, false, 55, lastName),
                   SizedBox(height: 15),
-                  GrayTextField("Username or Email", Colors.white, false, 55),
+                  GrayTextField(
+                      "Username or Email", Colors.white, false, 55, username),
                   SizedBox(height: 15),
-                  GrayTextField("Password", Colors.white, true, 55),
+                  GrayTextField("Password", Colors.white, true, 55, password),
                 ],
               ),
             ),
@@ -61,7 +86,9 @@ class SignUp extends StatelessWidget {
                         ]),
                     height: 48,
                     child: Center(
-                      child: Text("Sign Up", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      child: Text("Sign Up",
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold)),
                     ),
                   )),
             ),
@@ -79,7 +106,10 @@ class SignUp extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 3.0),
                   child: Text(
                     "Or Sign In With",
-                    style: TextStyle(color: Colors.white, fontSize: 17, fontFamily: 'NotoSans'),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
+                        fontFamily: 'NotoSans'),
                   ),
                 ),
                 Container(
@@ -94,10 +124,13 @@ class SignUp extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                SignInOption(Icons.ac_unit,Theme.of(context).primaryColor,),
-                SignInOption(Icons.format_align_justify_outlined,Theme.of(context).primaryColor,),
-                SignInOption(Icons.mark_chat_read,Theme.of(context).primaryColor),
-                SignInOption(Icons.access_alarms,Theme.of(context).primaryColor),
+                SignInOption(Icons.ac_unit, Theme.of(context).primaryColor, 1),
+                SignInOption(Icons.format_align_justify_outlined,
+                    Theme.of(context).primaryColor, 2),
+                SignInOption(
+                    Icons.mark_chat_read, Theme.of(context).primaryColor, 3),
+                SignInOption(
+                    Icons.access_alarms, Theme.of(context).primaryColor, 4),
               ],
             ),
           ],

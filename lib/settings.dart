@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'signIn.dart';
 
 class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.count(
       primary: false,
-      childAspectRatio: (163/120),
+      childAspectRatio: (163 / 120),
       padding: const EdgeInsets.all(20),
       crossAxisSpacing: 20,
       mainAxisSpacing: 20,
@@ -14,7 +15,7 @@ class Settings extends StatelessWidget {
         Block(
             Icon(Icons.edit, color: Theme.of(context).accentColor),
             Text("Me", style: TextStyle(color: Theme.of(context).accentColor)),
-            Text("Akhil Ramidi",
+            Text(userID.displayName,
                 style: TextStyle(color: Theme.of(context).accentColor))),
         Block(
             Icon(Icons.bug_report, color: Theme.of(context).accentColor),
@@ -76,14 +77,18 @@ class Block extends StatelessWidget {
         color: Theme.of(context).primaryColorLight,
       ),
       child: Padding(
-        padding: const EdgeInsets.only(left: 30.0,bottom: 30.0,top: 30.0),
+        padding: const EdgeInsets.only(left: 30.0, bottom: 30.0, top: 30.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
-            child: icon,
-          ), text, desc],
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: icon,
+            ),
+            text,
+            desc
+          ],
         ),
       ),
     );

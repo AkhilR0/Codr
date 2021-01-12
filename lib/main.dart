@@ -1,15 +1,30 @@
-import 'package:codr/generalAppBar.dart';
-import 'package:codr/settings.dart';
+// Themes
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// Screens
+import 'generalAppBar.dart';
+import 'settings.dart';
 import 'newPost.dart';
 import 'notifications.dart';
 import 'profile.dart';
 import 'grid.dart';
 import 'signIn.dart';
-import 'signUp.dart';
 
-void main() {
-  runApp(MyApp());
+// Firebase
+import 'package:firebase_core/firebase_core.dart';
+import 'auth.dart';
+
+int bodyIndex = 0;
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  if (userID == null) {
+    userID = FirebaseAuth.instance.currentUser;
+  }
+  runApp(App());
 }
 
 extension HexColor on Color {
@@ -27,6 +42,77 @@ extension HexColor on Color {
       '${green.toRadixString(16).padLeft(2, '0')}'
       '${blue.toRadixString(16).padLeft(2, '0')}';
 }
+
+class App extends StatelessWidget {
+  // Create the initialization Future outside of `build`:
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      // Initialize FlutterFire:
+      future: _initialization,
+      builder: (context, snapshot) {
+        // Check for errors
+        if (snapshot.hasError) {
+          return SomethingWentWrong();
+        }
+
+        // Once complete, show your application
+        if (snapshot.connectionState == ConnectionState.done) {
+          // Future.delayed(const Duration(seconds: 3), () {
+          return MyApp();
+          // });
+        }
+
+        // Otherwise, show something whilst waiting for initialization to complete
+        return Loading();
+      },
+    );
+  }
+}
+
+class Loading extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        backgroundColor: Color(0xFF2F2F2F),
+        body: Center(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('assets/logo.png', width: 50, height: 50),
+            SizedBox(height: 20),
+            CupertinoActivityIndicator(),
+          ],
+        )),
+      ),
+    );
+  }
+}
+
+class SomethingWentWrong extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Center(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('assets/logo.png', width: 50, height: 50),
+            Text(
+              'Something went wrong, please restart the app',
+              style: TextStyle(color: Colors.red),
+            )
+          ],
+        )),
+      ),
+    );
+  }
+}
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -34,26 +120,22 @@ class MyApp extends StatelessWidget {
       title: 'Codr',
       theme: ThemeData(
         primaryColor: Color(0xFF2F2F2F),
-        accentColor:  HexColor.fromHex('#34ffc8'),
+        accentColor: HexColor.fromHex('#34ffc8'),
         primaryColorLight: Color(0xFF373737),
         buttonColor: Color(0xff5A43BC),
         fontFamily: 'Muli',
       ),
-      home: MyHomePage(),
+      home: userState(),
     );
   }
 }
 
-int bodyIndex = 0;
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
-
+class MainScreen extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MainScreenState createState() => _MainScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,11 +150,10 @@ class _MyHomePageState extends State<MyHomePage> {
           key: bottomKey,
           iconSize: 30,
           type: BottomNavigationBarType.fixed,
-          unselectedItemColor: Colors.white,
+          unselectedItemColor: Color(0x6634ffc8),
           unselectedFontSize: 0,
           selectedFontSize: 0,
           backgroundColor: Theme.of(context).primaryColorLight,
-          elevation: 0,
           onTap: (int i) {
             setState(() {
               bodyIndex = i;
