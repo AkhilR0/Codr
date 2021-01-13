@@ -8,9 +8,15 @@ class CommonContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-        color: containerColor,
-      ),
+          color: containerColor,
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black,
+                offset: Offset(0, 3),
+                blurRadius: 4,
+                spreadRadius: -4)
+          ]),
       child: containerChild,
     );
   }

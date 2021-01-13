@@ -14,7 +14,15 @@ class Grid extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(
                 Radius.circular(20),
+                
               ),
+              boxShadow: [
+            BoxShadow(
+                color: Colors.black,
+                offset: Offset(0, 3),
+                blurRadius: 4,
+                spreadRadius: -4)
+          ],
               color: Theme.of(context).primaryColorLight,
             ),
             child: Padding(
@@ -24,28 +32,34 @@ class Grid extends StatelessWidget {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20),
-                      ),
-                      color: Theme.of(context).primaryColor,
-                    ),
-                                          height: 200,
-
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(20),
+                        ),
+                        color: Theme.of(context).primaryColor,
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black,
+                              offset: Offset(0, 3),
+                              blurRadius: 4,
+                              spreadRadius: -4)
+                        ]),
+                    height: 200,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
                     child: Text("Example Proj.",
-                            style: TextStyle(
-                                color: Theme.of(context).accentColor,
-                                fontSize: 40)),
+                        style: TextStyle(
+                            color: Theme.of(context).accentColor,
+                            fontSize: 40)),
                   ),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 16.0),
-                                child: Text("This is an example project, it looks pretty cool and is an example of javascript I think. Not totally sure what this project is about. But its cool. I’m running out of things to say now.",
-                          style: TextStyle(
-                                color: Theme.of(context).accentColor,
-                                fontSize: 20)),
-                              ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 16.0),
+                    child: Text(
+                        "This is an example project, it looks pretty cool and is an example of javascript I think. Not totally sure what this project is about. But its cool. I’m running out of things to say now.",
+                        style: TextStyle(
+                            color: Theme.of(context).accentColor,
+                            fontSize: 20)),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

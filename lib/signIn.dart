@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'auth.dart';
 import 'signUp.dart';
+import 'pageAnimation.dart';
 
 String username;
 String password;
@@ -49,10 +50,10 @@ class SignIn extends StatelessWidget {
                     height: 55,
                     child: Center(
                         child: GrayTextField("Username or Email", Colors.white,
-                            false, 55, username)),
+                            false, 55, "Username")),
                   ),
                   SizedBox(height: 15),
-                  GrayTextField("Password", Colors.white, true, 55, password)
+                  GrayTextField("Password", Colors.white, true, 55, "Password")
                 ],
               ),
             ),
@@ -74,10 +75,29 @@ class SignIn extends StatelessWidget {
               child: RawMaterialButton(
                   onPressed: () async {
                     try {
+                      print(username);
                       UserCredential userCredential = await FirebaseAuth
                           .instance
                           .signInWithEmailAndPassword(
                               email: username, password: password);
+                      userID = userCredential.user;
+                      // Check if user properly signed in
+                      if (userID != null &&
+                          !userID.isAnonymous &&
+                          await userID.getIdToken() != null) {
+                        final User currentUser =
+                            FirebaseAuth.instance.currentUser;
+                        if (userID.uid == currentUser.uid) {
+                          Navigator.pop(context);
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return MainScreen();
+                              },
+                            ),
+                          );
+                        }
+                      }
                     } on FirebaseAuthException catch (e) {
                       if (e.code == 'user-not-found') {
                         print('No user found for that email.');
@@ -88,15 +108,16 @@ class SignIn extends StatelessWidget {
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        color: Theme.of(context).accentColor,
-                        boxShadow: [
-                          BoxShadow(
-                              color: Theme.of(context).accentColor,
-                              spreadRadius: 0.000001,
-                              blurRadius: 15,
-                              offset: Offset(0, 10))
-                        ]),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      color: Theme.of(context).accentColor,
+                      boxShadow: [
+                        BoxShadow(
+                            color: Theme.of(context).accentColor,
+                            offset: Offset(0, 3),
+                            blurRadius: 8,
+                            spreadRadius: -4)
+                      ],
+                    ),
                     height: 48,
                     child: Center(
                       child: Text("Sign In",
@@ -244,8 +265,8 @@ class GrayTextField extends StatelessWidget {
   final bool obs;
   final Color txtColor;
   final double heig;
-  String input;
-  GrayTextField(this.theText, this.txtColor, this.obs, this.heig, this.input);
+  final String sinput;
+  GrayTextField(this.theText, this.txtColor, this.obs, this.heig, this.sinput);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -259,8 +280,30 @@ class GrayTextField extends StatelessWidget {
         child: Center(
           child: TextFormField(
             onChanged: (value) {
-              input = value;
-              print(input);
+              switch (sinput) {
+                case "First Name":
+                  {
+                    firstName = value;
+                  }
+                  break;
+
+                case "Last Name":
+                  {
+                    lastName = value;
+                  }
+                  break;
+
+                case "Username":
+                  {
+                    username = value;
+                  }
+                  break;
+                case "Password":
+                  {
+                    password = value;
+                  }
+                  break;
+              }
             },
             obscureText: obs,
             style: TextStyle(color: txtColor, fontFamily: 'NotoSans'),

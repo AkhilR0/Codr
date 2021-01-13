@@ -15,6 +15,13 @@ class Notifications extends StatelessWidget {
                 borderRadius: BorderRadius.all(
                   Radius.circular(20),
                 ),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.black,
+                      offset: Offset(0, 3),
+                      blurRadius: 4,
+                      spreadRadius: -4)
+                ],
                 color: Theme.of(context).primaryColorLight,
               ),
               child: Row(

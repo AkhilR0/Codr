@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'signIn.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'pageAnimation.dart';
 
 String firstName;
 String lastName;
@@ -46,7 +48,7 @@ class SignUp extends StatelessWidget {
                       ),
                     );
                   },
-                                  child: Text("Sign In",
+                  child: Text("Sign In",
                       style: TextStyle(
                           color: Theme.of(context).buttonColor,
                           fontSize: 17,
@@ -59,31 +61,72 @@ class SignUp extends StatelessWidget {
               child: Column(
                 children: [
                   GrayTextField(
-                      "First Name", Colors.white, false, 55, firstName),
-                  SizedBox(height: 15),
-                  GrayTextField("Last Name", Colors.white, false, 55, lastName),
+                      "First Name", Colors.white, false, 55, "First Name"),
                   SizedBox(height: 15),
                   GrayTextField(
-                      "Username or Email", Colors.white, false, 55, username),
+                      "Last Name", Colors.white, false, 55, "Last Name"),
                   SizedBox(height: 15),
-                  GrayTextField("Password", Colors.white, true, 55, password),
+                  GrayTextField(
+                      "Username or Email", Colors.white, false, 55, "Username"),
+                  SizedBox(height: 15),
+                  GrayTextField("Password", Colors.white, true, 55, "Password"),
                 ],
               ),
             ),
             Container(
               child: RawMaterialButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    try {
+                      UserCredential userCredential = await FirebaseAuth
+                          .instance
+                          .createUserWithEmailAndPassword(
+                        email: username,
+                        password: password,
+                      );
+                      userID = userCredential.user;
+                      // Check if user properly signed in
+                      if (userID != null &&
+                          !userID.isAnonymous &&
+                          await userID.getIdToken() != null) {
+                        userID.updateProfile(
+                            displayName: "$firstName $lastName");
+                        final User currentUser =
+                            FirebaseAuth.instance.currentUser;
+                        if (userID.uid == currentUser.uid) {
+                          Navigator.pop(context);
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return MainScreen();
+                              },
+                            ),
+                          );
+                        }
+                      }
+                      // Otherwise, return nothing
+                      return null;
+                    } on FirebaseAuthException catch (e) {
+                      if (e.code == 'weak-password') {
+                        print('The password provided is too weak.');
+                      } else if (e.code == 'email-already-in-use') {
+                        print('The account already exists for that email.');
+                      }
+                    } catch (e) {
+                      print(e);
+                    }
+                  },
                   child: Container(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        color: Theme.of(context).accentColor,
-                        boxShadow: [
-                          BoxShadow(
-                              color: Theme.of(context).accentColor,
-                              spreadRadius: 0.000001,
-                              blurRadius: 15,
-                              offset: Offset(0, 10))
-                        ]),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      color: Theme.of(context).accentColor,
+                      boxShadow: [
+                        BoxShadow(
+                            color: Theme.of(context).accentColor,
+                            offset: Offset(0, 3),
+                            blurRadius: 8,
+                            spreadRadius: -4)
+                      ],
+                    ),
                     height: 48,
                     child: Center(
                       child: Text("Sign Up",

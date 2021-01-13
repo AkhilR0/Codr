@@ -240,7 +240,6 @@ class _NewPostState extends State<NewPost> {
             ),
           ),
         );
-        // navigationBar.onTap(2);
       },
       padding: EdgeInsets.all(0),
     );

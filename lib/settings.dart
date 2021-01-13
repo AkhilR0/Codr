@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'signIn.dart';
+import 'auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Settings extends StatelessWidget {
   @override
@@ -15,7 +17,7 @@ class Settings extends StatelessWidget {
         Block(
             Icon(Icons.edit, color: Theme.of(context).accentColor),
             Text("Me", style: TextStyle(color: Theme.of(context).accentColor)),
-            Text(userID.displayName,
+            Text("j",
                 style: TextStyle(color: Theme.of(context).accentColor))),
         Block(
             Icon(Icons.bug_report, color: Theme.of(context).accentColor),
@@ -71,24 +73,39 @@ class Block extends StatelessWidget {
   Block(this.icon, this.text, this.desc);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
+    return RawMaterialButton(
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(20)),
-        color: Theme.of(context).primaryColorLight,
       ),
-      child: Padding(
-        padding: const EdgeInsets.only(left: 30.0, bottom: 30.0, top: 30.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
-              child: icon,
-            ),
-            text,
-            desc
-          ],
+      splashColor: Theme.of(context).primaryColor,
+      fillColor: Theme.of(context).primaryColorLight,
+      onPressed: () async {
+        await FirebaseAuth.instance.signOut();
+        Navigator.pop(context);
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) {
+              return SignIn();
+            },
+          ),
+        );
+      },
+      child: Container(
+        constraints: BoxConstraints.expand(),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 30.0, bottom: 30.0, top: 30.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: icon,
+              ),
+              text,
+              desc
+            ],
+          ),
         ),
       ),
     );
