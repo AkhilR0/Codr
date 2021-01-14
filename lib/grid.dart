@@ -36,6 +36,12 @@ class Grid extends StatelessWidget {
                           Radius.circular(20),
                         ),
                         color: Theme.of(context).primaryColor,
+                        image: DecorationImage(
+                          image: NetworkImage(
+                            'https://www.einfochips.com/blog/wp-content/uploads/2018/11/how-to-develop-machine-learning-applications-for-business-banner.jpg'
+                          ),
+                          fit: BoxFit.fitHeight
+                        ),
                         boxShadow: [
                           BoxShadow(
                               color: Colors.black,
@@ -47,7 +53,7 @@ class Grid extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    child: Text("Example Proj.",
+                    child: Text("Machine Learning: The Great Stagnation",
                         style: TextStyle(
                             color: Theme.of(context).accentColor,
                             fontSize: 40)),
@@ -55,7 +61,7 @@ class Grid extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16.0),
                     child: Text(
-                        "This is an example project, it looks pretty cool and is an example of javascript I think. Not totally sure what this project is about. But its cool. I’m running out of things to say now.",
+                        "Academics think of themselves as trailblazers, explorers - seekers of the truth. Any fundamental discovery involves a significant degree of risk. If an idea is guaranteed to work then it moves from the realm of research... ",
                         style: TextStyle(
                             color: Theme.of(context).accentColor,
                             fontSize: 20)),
@@ -68,7 +74,7 @@ class Grid extends StatelessWidget {
                               color: Theme.of(context).accentColor,
                               fontSize: 20)),
                       Icon(
-                        Icons.bluetooth,
+                        Icons.api,
                         color: Theme.of(context).accentColor,
                       )
                     ],

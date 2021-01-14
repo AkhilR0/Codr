@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'signIn.dart';
 import 'package:flutter_chips_input/flutter_chips_input.dart';
 import 'hashTagsData.dart';
@@ -180,13 +181,7 @@ class _NewPostState extends State<NewPost> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20)),
                                 color: Theme.of(context).accentColor,
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Theme.of(context).accentColor,
-                                      spreadRadius: 0.000001,
-                                      blurRadius: 15,
-                                      offset: Offset(0, 10))
-                                ]),
+                                ),
                             height: 48,
                             child: Center(
                               child:
@@ -226,10 +221,10 @@ class _NewPostState extends State<NewPost> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         SignInOption(
-                            Icons.ac_unit, Theme.of(context).primaryColorLight,1),
-                        SignInOption(Icons.format_align_justify_outlined,
+                            FontAwesomeIcons.google, Theme.of(context).primaryColorLight,1),
+                        SignInOption(FontAwesomeIcons.facebookF,
                             Theme.of(context).primaryColorLight,2),
-                        SignInOption(Icons.mark_chat_read,
+                        SignInOption(FontAwesomeIcons.github,
                             Theme.of(context).primaryColorLight,3),
                       ],
                     ),
@@ -263,6 +258,7 @@ class _TopMyButtonState extends State<TopMyButton> {
             color: Theme.of(context).accentColor,
             onPressed: () {
               navigationBar.onTap(2);
+              
             },
           );
         }

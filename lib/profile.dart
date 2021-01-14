@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
-import 'newPost.dart';
+import 'package:flutter/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'commonContainer.dart';
+import 'newPost.dart';
 import 'signIn.dart';
 
 class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical:14.0, horizontal: 10),
+      padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 10),
       child: Center(
         child: ListView(
           children: [
@@ -32,10 +35,16 @@ class Profile extends StatelessWidget {
                                 color: Theme.of(context).primaryColor,
                               ),
                               child: Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Icon(Icons.person,
-                                    color: Theme.of(context).buttonColor),
-                              ),
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Container(
+                                    width: 60,
+                                    height: 60,
+                                    decoration: new BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        image: new DecorationImage(
+                                            image: NetworkImage(
+                                                'https://img1.wsimg.com/isteam/ip/5975e783-3e11-4bcf-8c45-320a644aca44/circle-cropped%20(4).png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1023,cg:true/rs=w:600px,m,cg:true'))),
+                                  )),
                             ),
                           ),
                           Text(
@@ -55,8 +64,8 @@ class Profile extends StatelessWidget {
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(16.0),
-                                child:
-                                    Icon(Icons.person, color: Colors.transparent),
+                                child: Icon(Icons.person,
+                                    color: Colors.transparent),
                               ),
                             ),
                           ),
@@ -82,8 +91,8 @@ class Profile extends StatelessWidget {
                                           CrossAxisAlignment.center,
                                       children: [
                                         Padding(
-                                          padding:
-                                              const EdgeInsets.only(bottom: 8.0),
+                                          padding: const EdgeInsets.only(
+                                              bottom: 8.0),
                                           child: CommonContainer(
                                               Theme.of(context).primaryColor,
                                               Padding(
@@ -96,11 +105,16 @@ class Profile extends StatelessWidget {
                                                     Text(
                                                       "Favorite Language: ",
                                                       style: TextStyle(
-                                                          color: Theme.of(context)
-                                                              .accentColor,
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .accentColor,
                                                           fontSize: 20),
                                                     ),
-                                                    Icon(Icons.android, color: Theme.of(context).accentColor),
+                                                    FaIcon(
+                                                      FontAwesomeIcons.java,
+                                                      color: Theme.of(context)
+                                                          .accentColor,
+                                                    ),
                                                   ],
                                                 ),
                                               )),
@@ -112,7 +126,7 @@ class Profile extends StatelessWidget {
                                       Padding(
                                         padding: const EdgeInsets.all(10.0),
                                         child: Text(
-                                          "A quick bio about myself that talks about things that I do",
+                                          "A Robotics Developer with interest in JVM, CPP and more.",
                                           style: TextStyle(
                                               color:
                                                   Theme.of(context).accentColor,
@@ -127,7 +141,10 @@ class Profile extends StatelessWidget {
                             SizedBox(width: 40),
                             Padding(
                               padding: const EdgeInsets.only(
-                                  top: 8.0, bottom: 8.0, left: 8.0, right: 28.0),
+                                  top: 8.0,
+                                  bottom: 8.0,
+                                  left: 8.0,
+                                  right: 28.0),
                               child: Container(
                                 decoration: BoxDecoration(
                                   borderRadius:
@@ -154,7 +171,8 @@ class Profile extends StatelessWidget {
                       padding:
                           const EdgeInsets.only(top: 20.0, left: 20, right: 20),
                       child: Text("FOLLOWERS",
-                          style: TextStyle(color: Theme.of(context).accentColor)),
+                          style:
+                              TextStyle(color: Theme.of(context).accentColor)),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -165,8 +183,27 @@ class Profile extends StatelessWidget {
                           child: CommonContainer(
                               Theme.of(context).primaryColor,
                               Container(
-                                height: 40,
-                                width: 40,
+                                  height: 40,
+                                  width: 40,
+                                  decoration: new BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                        image: NetworkImage(
+                                            'https://thispersondoesnotexist.com/image')),
+                                  ))),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(.0),
+                          child: CommonContainer(
+                              Theme.of(context).primaryColor,
+                              Container(
+                                  height: 40,
+                                  width: 40,
+                                  decoration: new BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(image: new NetworkImage('https://thispersondoesnotexist.com/image?1')),
+
+                                  )
                               )),
                         ),
                         Padding(
@@ -176,15 +213,11 @@ class Profile extends StatelessWidget {
                               Container(
                                 height: 40,
                                 width: 40,
-                              )),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(.0),
-                          child: CommonContainer(
-                              Theme.of(context).primaryColor,
-                              Container(
-                                height: 40,
-                                width: 40,
+                                  decoration: new BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(image: new NetworkImage('https://thispersondoesnotexist.com/image?2')),
+
+                                  )
                               )),
                         ),
                         Padding(
@@ -194,6 +227,11 @@ class Profile extends StatelessWidget {
                               Container(
                                 height: 40,
                                 width: 40,
+                                  decoration: new BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(image: new NetworkImage('https://thispersondoesnotexist.com/image?4')),
+
+                                  )
                               )),
                         ),
                       ],
@@ -213,7 +251,8 @@ class Profile extends StatelessWidget {
                       padding:
                           const EdgeInsets.only(top: 20.0, left: 20, right: 20),
                       child: Text("PROJECTS",
-                          style: TextStyle(color: Theme.of(context).accentColor)),
+                          style:
+                              TextStyle(color: Theme.of(context).accentColor)),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -225,6 +264,11 @@ class Profile extends StatelessWidget {
                               Container(
                                 height: 88,
                                 width: 88,
+                                  decoration: new BoxDecoration(
+                                    shape: BoxShape.rectangle,
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    image: DecorationImage(image: new NetworkImage('https://source.unsplash.com/88x88/?hacker')),
+                                  )
                               )),
                         ),
                         Padding(
@@ -234,6 +278,12 @@ class Profile extends StatelessWidget {
                                 Container(
                                   height: 88,
                                   width: 88,
+                                    decoration: new BoxDecoration(
+                                      shape: BoxShape.rectangle,
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      image: DecorationImage(image: new NetworkImage('https://source.unsplash.com/88x88/?hacker1'),
+                                      fit: BoxFit.fill),
+                                    )
                                 ))),
                         Padding(
                           padding: const EdgeInsets.all(20.0),

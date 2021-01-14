@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'commonContainer.dart';
+
 class Notifications extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -28,8 +30,18 @@ class Notifications extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(30.0),
-                    child: Icon(Icons.person),
+                    padding: const EdgeInsets.all(20.0),
+                    child:  CommonContainer(
+                        Theme.of(context).primaryColor,
+                        Container(
+                            height: 40,
+                            width: 40,
+                            decoration: new BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                  image: NetworkImage(
+                                      'https://thispersondoesnotexist.com/image?4')),
+                            ))),
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
