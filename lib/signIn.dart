@@ -129,13 +129,15 @@ class SignIn extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      color: Theme.of(context).primaryColor,
-                    ),
-                    height: 3,
-                    width: 100),
+                Flexible(
+                                  child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      height: 3,
+                      ),
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 3.0),
                   child: Text(
@@ -146,13 +148,15 @@ class SignIn extends StatelessWidget {
                         fontFamily: 'NotoSans'),
                   ),
                 ),
-                Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      color: Theme.of(context).primaryColor,
-                    ),
-                    height: 3,
-                    width: 100),
+                Flexible(
+                                  child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      height: 3,
+                      width: 100),
+                ),
               ],
             ),
             Row(

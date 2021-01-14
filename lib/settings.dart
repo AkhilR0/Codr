@@ -93,15 +93,14 @@ class Block extends StatelessWidget {
       child: Container(
         constraints: BoxConstraints.expand(),
         child: Padding(
-          padding: const EdgeInsets.only(left: 30.0, bottom: 30.0, top: 30.0),
+          // padding: const EdgeInsets.only(left: 30.0, bottom: 30.0, top: 30.0),
+          padding: const EdgeInsets.only(left: 0),
+
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: icon,
-              ),
+              icon,
               text,
               desc
             ],
