@@ -17,7 +17,7 @@ class Settings extends StatelessWidget {
         Block(
             Icon(Icons.edit, color: Theme.of(context).accentColor),
             Text("Me", style: TextStyle(color: Theme.of(context).accentColor)),
-            Text("j",
+            Text("Profile",
                 style: TextStyle(color: Theme.of(context).accentColor))),
         Block(
             Icon(Icons.bug_report, color: Theme.of(context).accentColor),
