@@ -96,12 +96,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Codr',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Color(0xFF2F2F2F),
         accentColor: Color(0xFF34ffc8),
         primaryColorLight: Color(0xFF373737),
         buttonColor: Color(0xff5A43BC),
         fontFamily: 'Muli',
+
       ),
       home: UserState(),
     );
