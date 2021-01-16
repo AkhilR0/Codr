@@ -5,7 +5,7 @@ Codr is a professional social media application, catered specifically to those i
 ### How did we make it?
 We used the flutter SDK to create this app, it deploys for both android and ios. This was made for 2020-21 FBLA Mobile Application Development.
 ### Copyright
-All trademarks, intellectual properties and copyrights are of their respective owners, we do not own any of them.
+All trademarks, intellectual properties and copyrights are of their respective owners, we do not claim ownership to any of them.
 ## iOS Install
 This guide provides a step-by-step walkthrough of releasing a
 Flutter app to the [App Store][appstore] and [TestFlight][].
