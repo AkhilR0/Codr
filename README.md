@@ -1,6 +1,9 @@
 # Codr
 
-A place where developers connect
+Codr is a professional social media application, catered specifically to those in the software engineering industry.
+
+### How did we make it?
+We used the flutter SDK to create this app, it deploys for both android and ios. This was made for 2020-21 FBLA Mobile Application Development. 
 
 ## iOS
 This guide provides a step-by-step walkthrough of releasing a
