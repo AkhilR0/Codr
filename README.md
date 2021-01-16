@@ -3,11 +3,13 @@
 Codr is a professional social media application, catered specifically to those in the software engineering industry.
 
 ### How did we make it?
-We used the flutter SDK to create this app, it deploys for both android and ios. This was made for 2020-21 FBLA Mobile Application Development. 
-
-## iOS
+We used the flutter SDK to create this app, it deploys for both android and ios. This was made for 2020-21 FBLA Mobile Application Development.
+### Copyright
+All trademarks, intellectual properties and copyrights are of their respective owners, we do not own any of them.
+## iOS Install
 This guide provides a step-by-step walkthrough of releasing a
 Flutter app to the [App Store][appstore] and [TestFlight][].
+
 
 ## Preliminaries
 
@@ -318,7 +320,7 @@ detailed overview of the process of releasing an app to the App Store.
 [obfuscating your Dart code]: /docs/deployment/obfuscate
 [TestFlight]: https://developer.apple.com/testflight/
 
-## Android
+## Android Install
 When you're ready to prepare a _release_ version of your app,
 for example to [publish to the Google Play Store][play],
 this page can help. Before publishing,
