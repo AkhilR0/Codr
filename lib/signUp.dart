@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'signIn.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'pageAnimation.dart';
@@ -167,13 +168,13 @@ class SignUp extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                SignInOption(Icons.ac_unit, Theme.of(context).primaryColor, 1),
-                SignInOption(Icons.format_align_justify_outlined,
+                SignInOption(FaIcon(FontAwesomeIcons.google).icon, Theme.of(context).primaryColor, 1),
+                SignInOption(FaIcon(FontAwesomeIcons.facebookF).icon,
                     Theme.of(context).primaryColor, 2),
                 SignInOption(
-                    Icons.mark_chat_read, Theme.of(context).primaryColor, 3),
+                    FaIcon(FontAwesomeIcons.github).icon, Theme.of(context).primaryColor, 3),
                 SignInOption(
-                    Icons.access_alarms, Theme.of(context).primaryColor, 4),
+                    FaIcon(FontAwesomeIcons.apple).icon, Theme.of(context).primaryColor, 4),
               ],
             ),
           ],
