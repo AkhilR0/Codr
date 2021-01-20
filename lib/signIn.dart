@@ -16,7 +16,7 @@ class SignIn extends StatelessWidget {
       appBar: AppBar(
           elevation: 0, backgroundColor: Theme.of(context).primaryColorLight),
       body: Padding(
-        padding: const EdgeInsets.only(right: 40.0, left: 40, bottom: 80),
+        padding: const EdgeInsets.only(right: 40.0, left: 40),
         child: Center(
             child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

@@ -15,7 +15,7 @@ dependencies:
   # Authorization
   google_sign_in: "^4.5.1"
   flutter_facebook_auth: ^2.0.0+1
-  sign_in_with_apple: ^2.5.2
+  # sign_in_with_apple: ^2.5.2
   github_sign_in: ^0.0.1
 
   # Firebase
